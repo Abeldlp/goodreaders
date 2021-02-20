@@ -28,7 +28,7 @@ class RatingTest extends TestCase
             'buy_link' => 'test url',
             'user_id' => $user->id
         ]);
-        
+
 
         $this->actingAs($user)->post('/api/rating', [
             'book_id' => $book->id,
