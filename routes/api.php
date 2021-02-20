@@ -21,6 +21,18 @@ Route::prefix('/books')->group(function(){
     Route::delete('/{id}', 'BookController@destroy');
 });
 
+Route::prefix('/rating')->group(function(){
+    Route::post('/', 'RatingController@store');
+    Route::put('/{id}', 'RatingController@update');
+    Route::delete('/{id}', 'RatingController@destroy');
+});
+
+Route::prefix('/reply')->group(function(){
+    Route::post('/', 'RatingController@store');
+    Route::put('/{id}', 'RatingController@update');
+    Route::delete('/{id}', 'RatingController@destroy');
+});
+
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
