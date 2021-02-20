@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 Route::prefix('/books')->group(function(){
     Route::get('/', 'BookController@index');
     Route::post('/save', 'BookController@store');
-    Route::put('/update/{id}', 'BookController@update');
+    Route::put('/{id}', 'BookController@update');
     Route::get('/{id}', 'BookController@show');
     Route::delete('/{id}', 'BookController@destroy');
 });

@@ -14,9 +14,18 @@ class BookController extends Controller
         return Book::with('user')->with('ratings')->get();
     }
 
-    public function store(SaveBookRequest $request)
+    public function store(Request $request)
     {
-        $validatedData =  $this->validate($request, $request->messages());
+        //DOUBLE CHECK IF THIS VALIDATION WORKS
+        //$validatedData =  $this->validate($request, $request->messages());
+        $validatedData =  $request->validate([
+            'title' => 'required',
+            'description' => '',
+            'image' => 'required',
+            'genre' => 'required',
+            'buy_link' => '',
+            'user_id' => 'integer'
+        ]);
 
         (new Book())->create($validatedData);
     }
@@ -29,11 +38,21 @@ class BookController extends Controller
         ];
     }
 
-    public function update(SaveBookRequest $request, $id)
+    public function update(Request $request, $id)
     {
-        $validatedData = $this->validate($request, $request->messages());
+        //DOUBLE CHECK IF THIS VALIDATION WORKS
+        //$validatedData = $this->validate($request, $request->messages());
+        $validatedData =  $request->validate([
+            'title' => 'required',
+            'description' => '',
+            'image' => 'required',
+            'genre' => 'required',
+            'buy_link' => '',
+            'user_id' => 'integer'
+        ]);
 
-        (new Book())::find($id)->update($validatedData);
+        $book = Book::findOrFail($id);
+        $book->update($validatedData);
     }
 
     public function destroy($id)
