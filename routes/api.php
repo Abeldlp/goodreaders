@@ -13,6 +13,13 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+Route::prefix('/books')->group(function(){
+    Route::get('/', 'BookController@index');
+    Route::post('/save', 'BookController@store');
+    Route::put('/update/{id}', 'BookController@update');
+    Route::get('/{id}', 'BookController@show');
+    Route::delete('/{id}', 'BookController@destroy');
+});
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();

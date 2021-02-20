@@ -11,7 +11,7 @@ class BookController extends Controller
 {
     public function index()
     {
-        return Book::with('user')->with('score')->get();
+        return Book::with('user')->with('ratings')->get();
     }
 
     public function store(SaveBookRequest $request)
