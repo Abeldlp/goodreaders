@@ -19,6 +19,7 @@ class BookTest extends TestCase
             'image' => 'none',
             'genre' => 'horror',
             'buy_link' => 'test url',
+            'author' => 'test_author',
             'user_id' => 1
         ]);
 
@@ -34,6 +35,7 @@ class BookTest extends TestCase
             'image' => 'none',
             'genre' => 'horror',
             'buy_link' => 'test url',
+            'author' => 'test_author',
             'user_id' => 1
         ]);
 
@@ -48,6 +50,7 @@ class BookTest extends TestCase
             'image' => 'none',
             'genre' => 'horror',
             'buy_link' => 'test url',
+            'author' => 'test_author',
             'user_id' => 1
         ]);
 
@@ -61,6 +64,7 @@ class BookTest extends TestCase
             'image' => 'none',
             'genre' => 'horror',
             'buy_link' => 'test url',
+            'author' => 'test_author',
             'user_id' => 1
         ]);
 
@@ -76,6 +80,7 @@ class BookTest extends TestCase
             'image' => 'none',
             'genre' => 'horror',
             'buy_link' => 'test url',
+            'author' => 'test_author',
             'user_id' => 1
         ]);
 
@@ -91,6 +96,7 @@ class BookTest extends TestCase
             'image' => 'none',
             'genre' => 'horror',
             'buy_link' => 'test url',
+            'author' => 'test_author',
             'user_id' => 1
         ]);
         $this->assertDatabaseCount('books', 1);

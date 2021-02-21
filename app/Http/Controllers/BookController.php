@@ -23,6 +23,7 @@ class BookController extends Controller
             'description' => '',
             'image' => 'required',
             'genre' => 'required',
+            'author' => '',
             'buy_link' => '',
             'user_id' => 'integer'
         ]);
@@ -48,6 +49,7 @@ class BookController extends Controller
             'image' => 'required',
             'genre' => 'required',
             'buy_link' => '',
+            'author' => '',
             'user_id' => 'integer'
         ]);
 
