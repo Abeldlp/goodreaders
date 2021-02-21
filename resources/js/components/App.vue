@@ -4,6 +4,7 @@
         <p class="ml-5">
             <router-link :to="{ name: 'main' }">Main</router-link> |
             <router-link :to="{ name: 'test' }">Test</router-link> |
+            <router-link :to="{ name: 'endpoints' }">Endpoints</router-link> |
         </p>
         <div v-if="!authUser" class="ml-5">
             <a href="/login">Login</a> |

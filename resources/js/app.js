@@ -30,6 +30,7 @@ Vue.use(VueRouter)
 import App from './components/App'
 import Main from './components/views/Index'
 import Test from './components/views/Test'
+import Endpoints from "./components/views/Endpoints";
 
 const router = new VueRouter({
     mode: 'history',
@@ -43,6 +44,11 @@ const router = new VueRouter({
             path: '/test',
             name: 'test',
             component: Test,
+        },
+        {
+            path: '/endpoints',
+            name: 'endpoints',
+            component: Endpoints,
         },
     ],
 });
