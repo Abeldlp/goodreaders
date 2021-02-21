@@ -13,7 +13,7 @@ class RatingController extends Controller
     {
         $validatedData = $request->validate([
             'book_id' => 'integer',
-            'user_id' => 'integer',
+            'user_id' => '',
             'score' => 'integer|required',
             'comment' => 'string'
         ]);
@@ -27,7 +27,7 @@ class RatingController extends Controller
     {
         $validatedData = $request->validate([
             'book_id' => 'integer',
-            'user_id' => 'integer',
+            'user_id' => '',
             'score' => 'integer|required',
             'comment' => 'string'
         ]);
