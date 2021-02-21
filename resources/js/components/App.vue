@@ -17,5 +17,11 @@
 <script>
     export default {
         name: 'App',
+        props : {
+            authUser : Object,
+        },
+        mounted() {
+            console.log(this.authUser)
+        }
     }
 </script>

@@ -16,10 +16,10 @@
     <script src="../js/app.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 </head>
-<body>
-<div id="app">
-    <app></app>
-</div>
-<script src="{{ mix('js/app.js') }}"></script>
-</body>
+    <body>
+        <div id="app">
+            <app auth-user="{{$auth_user}}"></app>
+        </div>
+        <script src="{{ mix('js/app.js') }}"></script>
+    </body>
 </html>
