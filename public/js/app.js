@@ -1861,13 +1861,28 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'App',
   props: {
     authUser: Object
   },
-  mounted: function mounted() {
-    console.log(this.authUser);
+  data: function data() {
+    return {
+      csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+    };
   }
 });
 
@@ -37696,13 +37711,46 @@ var render = function() {
         _c("router-link", { attrs: { to: { name: "test" } } }, [
           _vm._v("Test")
         ]),
-        _vm._v(" |\n        "),
-        _c("a", { attrs: { href: "/login" } }, [_vm._v("Login")]),
-        _vm._v(" |\n        "),
-        _c("a", { attrs: { href: "/register" } }, [_vm._v("Register")])
+        _vm._v(" |\n    ")
       ],
       1
     ),
+    _vm._v(" "),
+    !_vm.authUser
+      ? _c("div", { staticClass: "ml-5" }, [
+          _c("a", { attrs: { href: "/login" } }, [_vm._v("Login")]),
+          _vm._v(" |\n        "),
+          _c("a", { attrs: { href: "/register" } }, [_vm._v("Register")])
+        ])
+      : _c("div", { staticClass: "ml-5" }, [
+          _c("p", [_vm._v(_vm._s(_vm.authUser.name))]),
+          _vm._v(" "),
+          _c(
+            "a",
+            {
+              attrs: {
+                href: "/logout",
+                onclick:
+                  "event.preventDefault();\n           document.getElementById('logout-form').submit();"
+              }
+            },
+            [_vm._v("\n            logout\n        ")]
+          ),
+          _vm._v(" "),
+          _c(
+            "form",
+            {
+              staticClass: "d-none",
+              attrs: { id: "logout-form", action: "/logout", method: "POST" }
+            },
+            [
+              _c("input", {
+                attrs: { type: "hidden", name: "_token" },
+                domProps: { value: _vm.csrf }
+              })
+            ]
+          )
+        ]),
     _vm._v(" "),
     _c("div", { staticClass: "container" }, [_c("router-view")], 1)
   ])
