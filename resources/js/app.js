@@ -28,9 +28,9 @@ import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 
 import App from './components/App'
-import Main from './components/views/Index'
-import Test from './components/views/Test'
-import Endpoints from "./components/views/Endpoints";
+import Home from './views/Home.vue';
+import Test from './views/Test.vue';
+import Endpoints from './views/Endpoints.vue';
 
 const router = new VueRouter({
     mode: 'history',
@@ -38,7 +38,7 @@ const router = new VueRouter({
         {
             path: '/',
             name: 'main',
-            component: Main
+            component: Home
         },
         {
             path: '/test',

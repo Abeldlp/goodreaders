@@ -1,18 +1,18 @@
 <template>
     <div>
-        <h1 class="ml-3">Nav of the app goes here</h1>
-        <p class="ml-5">
-            <router-link :to="{ name: 'main' }">Main</router-link> |
+        <h1 >Good Readers</h1>
+        <div class="nav">
+            <router-link :to="{ name: 'main' }">Home</router-link> |
             <router-link :to="{ name: 'test' }">Test</router-link> |
             <router-link :to="{ name: 'endpoints' }">Endpoints</router-link> |
-        </p>
-        <div v-if="!authUser" class="ml-5">
+        </div>
+        <div v-if="!authUser" class="login-section" >
             <a href="/login">Login</a> |
             <a href="/register">Register</a>
         </div>
-        <div v-else class="ml-5">
-            <p>{{ authUser.name}}</p>
-            <a href="/logout"
+        <div v-else  class="logout-section">
+            <p class="user-name">{{ authUser.name}}</p>
+            <a class="logOut" href="/logout"
                onclick="event.preventDefault();
                document.getElementById('logout-form').submit();">
                 logout
@@ -41,3 +41,23 @@
         }
     }
 </script>
+<style>
+*{
+    padding: 0%;
+    margin: 0%;
+    box-sizing: border-box;
+}
+
+h1 {
+    display: flex;
+    justify-content: center;
+}
+.logout-section {
+    display: flex;
+    justify-content: flex-end;
+
+}
+
+
+
+</style>
