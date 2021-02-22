@@ -2,8 +2,8 @@
     <div>
         <h1 >Good Readers</h1>
         <div class="nav">
-            <router-link :to="{ name: 'main' }">Home</router-link> |
-            <router-link :to="{ name: 'test' }">Test</router-link> |
+            <router-link :to="{ name: 'main' }">Home</router-link> 
+            
             <router-link :to="{ name: 'endpoints' }">Endpoints</router-link> |
         </div>
         <div v-if="!authUser" class="login-section" >
