@@ -63,5 +63,7 @@ export default {
 </script>
 
 <style scoped>
-
+body {
+    display: none;
+}
 </style>
