@@ -43,15 +43,22 @@ class BookController extends Controller
     {
         $this->authorize('update', $book);
 
-        $validatedData =  $request->validate([
-            'title' => 'required',
-            'description' => '',
-            'image' => 'required',
-            'genre' => 'required',
-            'buy_link' => '',
-            'author' => '',
-            'user_id' => ''
-        ]);
+        $validatedData =  $request->validate(
+            [
+                'title' => 'required',
+                'description' => '',
+                'image' => 'required',
+                'genre' => 'required',
+                'buy_link' => '',
+                'author' => '',
+                'user_id' => ''
+            ],
+            [
+                'title.required' => 'the title is required',
+                'image.required' => 'the image is required',
+                'genre.required' => 'the genre is required',
+            ]
+        );
 
         $data = array_merge($validatedData, ['user_id' => Auth::id()]);
         $book->update($data);
