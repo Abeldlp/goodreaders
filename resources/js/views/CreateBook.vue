@@ -66,19 +66,24 @@ export default {
 </script>
 
 <style scoped>
-.container {
-    width: 500px;
-    max-width: 100%;
-    overflow: hidden;
-    min-height: 100vh;
-}
+    .container {
+        width: 500px;
+        max-width: 100%;
+        overflow: hidden;
+        min-height: 100vh;
+    }
 
-.form {
-    padding: 30px 40px;
-}
+    .form {
+        padding: 30px 40px;
+    }
 
-.form-control {
-    margin-bottom: 10px;
-    position: relative;
-}
+    .form-control {
+        margin-bottom: 10px;
+        position: relative;
+    }
+
+    input{
+        outline: none;
+        width: 75%;
+    }
 </style>

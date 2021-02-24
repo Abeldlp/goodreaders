@@ -6709,7 +6709,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.container[data-v-56f8b438] {\n    width: 500px;\n    max-width: 100%;\n    overflow: hidden;\n    min-height: 100vh;\n}\n.form[data-v-56f8b438] {\n    padding: 30px 40px;\n}\n.form-control[data-v-56f8b438] {\n    margin-bottom: 10px;\n    position: relative;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.container[data-v-56f8b438] {\n    width: 500px;\n    max-width: 100%;\n    overflow: hidden;\n    min-height: 100vh;\n}\n.form[data-v-56f8b438] {\n    padding: 30px 40px;\n}\n.form-control[data-v-56f8b438] {\n    margin-bottom: 10px;\n    position: relative;\n}\ninput[data-v-56f8b438]{\n    outline: none;\n    width: 75%;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
