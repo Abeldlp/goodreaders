@@ -29,7 +29,6 @@ Vue.use(VueRouter)
 
 import App from './components/App'
 import Home from './views/Home.vue';
-import Test from './views/Test.vue';
 import Endpoints from './views/Endpoints.vue';
 
 const router = new VueRouter({
@@ -39,11 +38,6 @@ const router = new VueRouter({
             path: '/',
             name: 'main',
             component: Home
-        },
-        {
-            path: '/test',
-            name: 'test',
-            component: Test,
         },
         {
             path: '/endpoints',
