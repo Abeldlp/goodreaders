@@ -56,17 +56,19 @@ class BookTest extends TestCase
             'genre' => 'horror',
             'buy_link' => 'test url',
             'author' => 'test_author',
-            'user_id' => '',
+            'user_id' => $user->id,
         ]);
 
-        $this->actingAs($user)->put('/api/books/1', [
+        $bookCreated = Book::all()->last();
+
+        $this->actingAs($user)->put('/api/books/'.$bookCreated->id, [
             'title' => 'changed',
             'description' => 'test description',
             'image' => 'none',
             'genre' => 'horror',
             'buy_link' => 'test url',
             'author' => 'test_author',
-            'user_id' => ''
+            'user_id' => $user->id
         ]);
 
         $bookUpdated = Book::all()->last();
@@ -91,20 +93,24 @@ class BookTest extends TestCase
 
     public function test_shouldDeteleBook()
     {
-        Book::create([
+        $this->withoutExceptionHandling();
+        $user1 = UserFactory::new()->create();
+
+        $this->actingAs($user1)->post('/api/books/save', [
             'title' => 'book to delete',
             'description' => 'test description',
             'image' => 'none',
             'genre' => 'horror',
             'buy_link' => 'test url',
             'author' => 'test_author',
-            'user_id' => 1
+            'user_id' => $user1->id,
         ]);
+
         $this->assertDatabaseCount('books', 1);
 
         $latestBook = Book::all()->last();
 
-        $this->delete('/api/books/'.$latestBook->id);
+        $this->actingAs($user1)->delete('/api/books/'.$latestBook->id);
         $this->assertDatabaseMissing('books', ['title' => 'book to delete']);
     }
 

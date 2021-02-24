@@ -1926,6 +1926,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 //
 //
 //
@@ -1984,6 +1986,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Endpoints"
 });
@@ -6630,7 +6633,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n*{\r\n    padding: 0%;\r\n    margin: 0%;\r\n    box-sizing: border-box;\n}\nh1 {\r\n    display: flex;\r\n    justify-content: center;\n}\n.logout-section {\r\n    display: flex;\r\n    justify-content: flex-end;\n}\r\n\r\n\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n*{\n    padding: 0%;\n    margin: 0%;\n    box-sizing: border-box;\n}\nh1 {\n    display: flex;\n    justify-content: center;\n}\n.logout-section {\n    display: flex;\n    justify-content: flex-end;\n}\n\n\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -6654,7 +6657,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\np[data-v-63cd6604]{\r\n    overflow: hidden;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\np[data-v-63cd6604]{\n    overflow: hidden;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -38425,11 +38428,7 @@ var render = function() {
         _c("router-link", { attrs: { to: { name: "main" } } }, [
           _vm._v("Home")
         ]),
-        _vm._v(" |\n        "),
-        _c("router-link", { attrs: { to: { name: "test" } } }, [
-          _vm._v("Test")
-        ]),
-        _vm._v(" |\n        "),
+        _vm._v(" "),
         _c("router-link", { attrs: { to: { name: "endpoints" } } }, [
           _vm._v("Endpoints")
         ]),
@@ -38743,7 +38742,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("h1", [_vm._v("Test")])
+  return _c("div")
 }
 var staticRenderFns = []
 render._withStripped = true

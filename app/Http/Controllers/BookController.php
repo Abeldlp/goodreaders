@@ -18,8 +18,6 @@ class BookController extends Controller
 
     public function store(Request $request)
     {
-        //DOUBLE CHECK IF THIS VALIDATION WORKS
-        //$validatedData =  $this->validate($request, $request->messages());
         $validatedData =  $request->validate([
             'title' => 'required',
             'description' => '',
@@ -33,18 +31,18 @@ class BookController extends Controller
         (new Book())->create($data);
     }
 
-    public function show($id)
+    public function show(Book $book)
     {
         return [
-            'book' => Book::find($id),
-            'ratings' => Rating::where('book_id', $id)->with('user')->with('replies')->get()
+            'book' => $book,
+            'ratings' => Rating::where('book_id', $book->id)->with('user')->with('replies')->get()
         ];
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, Book $book)
     {
-        $this->middleware('auth');
-        //TO DOUBLE CHECK!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        $this->authorize('update', $book);
+
         $validatedData =  $request->validate([
             'title' => 'required',
             'description' => '',
@@ -55,22 +53,13 @@ class BookController extends Controller
             'user_id' => ''
         ]);
 
-        $book = Book::findOrFail($id);
-
-        //$this->authorize('update', $book->id);
-        //$book->update($validatedData);
-
-        if(Auth::id() === $book->user_id){
-            $data = array_merge($validatedData, ['user_id' => Auth::id()]);
-            $book->update($data);
-        } else {
-            abort(403, 'Nope!');
-        }
-
+        $data = array_merge($validatedData, ['user_id' => Auth::id()]);
+        $book->update($data);
     }
 
-    public function destroy($id)
+    public function destroy(Book $book)
     {
-        Book::destroy($id);
+        $this->authorize('delete', $book);
+        Book::destroy($book->id);
     }
 }

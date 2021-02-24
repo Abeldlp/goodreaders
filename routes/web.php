@@ -16,4 +16,30 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
+Route::prefix('/api')->group(function () {
+    Route::prefix('/books')->group(function(){
+        Route::get('/', 'BookController@index');
+        Route::post('/save', 'BookController@store')->middleware('auth');
+        Route::put('/{book}', 'BookController@update')->middleware('auth');
+        Route::get('/{book}', 'BookController@show');
+        Route::delete('/{book}', 'BookController@destroy')->middleware('auth');
+    });
+
+    Route::prefix('/rating')->middleware('auth')->group(function(){
+        Route::post('/', 'RatingController@store');
+        Route::put('/{id}', 'RatingController@update');
+        Route::delete('/{id}', 'RatingController@destroy');
+    });
+
+    Route::prefix('/reply')->middleware('auth')->group(function(){
+        Route::post('/', 'RatingController@store');
+        Route::put('/{id}', 'RatingController@update');
+        Route::delete('/{id}', 'RatingController@destroy');
+    });
+});
+
 Route::get('/{any}', 'SpaController@index')->where('any', '.*');
+
+
+
+
