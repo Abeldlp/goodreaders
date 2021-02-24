@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Models\Book;
+use Database\Factories\UserFactory;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -29,7 +30,8 @@ class BookTest extends TestCase
 
     public function test_shouldSaveNewBook()
     {
-        $this->post('/api/books/save', [
+        $user = UserFactory::new()->create();
+        $this->actingAs($user)->post('/api/books/save', [
             'title' => 'test',
             'description' => 'test description',
             'image' => 'none',
@@ -44,32 +46,31 @@ class BookTest extends TestCase
 
     public function test_shouldUpdateBook(){
 
-        Book::create([
+        $this->withoutExceptionHandling();
+        $user = UserFactory::new()->create();
+
+        $this->actingAs($user)->post('/api/books/save', [
             'title' => 'previous',
             'description' => 'test description',
             'image' => 'none',
             'genre' => 'horror',
             'buy_link' => 'test url',
             'author' => 'test_author',
-            'user_id' => 1
+            'user_id' => '',
         ]);
 
-        $bookCreated = Book::all()->last();
-        $this->assertEquals('previous', $bookCreated->title);
-
-
-        $this->put('/api/books/'.$bookCreated->id, [
+        $this->actingAs($user)->put('/api/books/1', [
             'title' => 'changed',
             'description' => 'test description',
             'image' => 'none',
             'genre' => 'horror',
             'buy_link' => 'test url',
             'author' => 'test_author',
-            'user_id' => 1
+            'user_id' => ''
         ]);
 
-        $afterUpdate = Book::all()->last();
-        $this->assertEquals('changed', $afterUpdate->title);
+        $bookUpdated = Book::all()->last();
+        $this->assertEquals('changed', $bookUpdated->title);
     }
 
     public function test_shouldShow1Book()
@@ -105,6 +106,38 @@ class BookTest extends TestCase
 
         $this->delete('/api/books/'.$latestBook->id);
         $this->assertDatabaseMissing('books', ['title' => 'book to delete']);
+    }
+
+    /** @test */
+    public function it_should_deny_update_to_other_user()
+    {
+        $user1 = UserFactory::new()->create();
+
+        $this->actingAs($user1)->post('/api/books/save', [
+            'title' => 'test',
+            'description' => 'test description',
+            'image' => 'none',
+            'genre' => 'horror',
+            'buy_link' => 'test url',
+            'author' => 'test_author',
+            'user_id' => $user1->id,
+        ]);
+
+        $lastBookCreated = Book::all()->last();
+
+        $user2 = UserFactory::new()->create();
+
+        $response = $this->actingAs($user2)->put('/api/books/'.$lastBookCreated->id, [
+            'title' => 'changed',
+            'description' => 'test description',
+            'image' => 'none',
+            'genre' => 'horror',
+            'buy_link' => 'test url',
+            'author' => 'test_author',
+            'user_id' => 1
+        ]);
+
+        $response->assertForbidden();
     }
 
 }

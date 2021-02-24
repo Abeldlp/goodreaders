@@ -5,8 +5,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix('/books')->group(function(){
     Route::get('/', 'BookController@index');
-    Route::post('/save', 'BookController@store');
-    Route::put('/{id}', 'BookController@update');
+    Route::post('/save', 'BookController@store')->middleware('auth');
+    Route::put('/{id}', 'BookController@update')->middleware('auth');//->middleware('can:update,App\Book');
     Route::get('/{id}', 'BookController@show');
     Route::delete('/{id}', 'BookController@destroy');
 });

@@ -4,7 +4,7 @@
         <div v-for="book in books" :key="book.id">
             <h3>{{book.title}}</h3>
             <p>{{book.description}}</p>
-            
+
         </div>
     </div>
 </template>
@@ -29,7 +29,7 @@ export default {
 </script>
 
 <style scoped>
-p{
-    overflow: hidden;
-}
+    p{
+        overflow: hidden;
+    }
 </style>

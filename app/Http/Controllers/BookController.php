@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Requests\SaveBookRequest;
 use App\Models\Book;
 use App\Models\Rating;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class BookController extends Controller
 {
@@ -25,10 +27,10 @@ class BookController extends Controller
             'genre' => 'required',
             'author' => '',
             'buy_link' => '',
-            'user_id' => 'integer'
+            'user_id' => ''
         ]);
-
-        (new Book())->create($validatedData);
+        $data = array_merge($validatedData, ['user_id' => Auth::id()]);
+        (new Book())->create($data);
     }
 
     public function show($id)
@@ -41,8 +43,8 @@ class BookController extends Controller
 
     public function update(Request $request, $id)
     {
-        //DOUBLE CHECK IF THIS VALIDATION WORKS
-        //$validatedData = $this->validate($request, $request->messages());
+        $this->middleware('auth');
+        //TO DOUBLE CHECK!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         $validatedData =  $request->validate([
             'title' => 'required',
             'description' => '',
@@ -50,11 +52,21 @@ class BookController extends Controller
             'genre' => 'required',
             'buy_link' => '',
             'author' => '',
-            'user_id' => 'integer'
+            'user_id' => ''
         ]);
 
         $book = Book::findOrFail($id);
-        $book->update($validatedData);
+
+        //$this->authorize('update', $book->id);
+        //$book->update($validatedData);
+
+        if(Auth::id() === $book->user_id){
+            $data = array_merge($validatedData, ['user_id' => Auth::id()]);
+            $book->update($data);
+        } else {
+            abort(403, 'Nope!');
+        }
+
     }
 
     public function destroy($id)
