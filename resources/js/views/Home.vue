@@ -1,35 +1,42 @@
 <template>
-    <div>
-        <form></form>
-        <div v-for="book in books" :key="book.id">
-            <h3>{{book.title}}</h3>
-            <p>{{book.description}}</p>
-
+    <div class="container">
+        <div class="row justify-content-end">
+            <div class="col-2">
+                <router-link :to="{ name: 'createbook' }">
+                    <button>Add a book</button>
+                </router-link>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4 book-list " v-for="book in books" :key="book.id">
+                <h5>{{ book.title }}</h5>
+                <p>{{ book.author }}</p>
+            </div>
         </div>
     </div>
 </template>
 
 <script>
-import axios from 'axios';
-import Form from '../components/Form.vue';
+import axios from "axios";
+
 export default {
     name: "Home",
-    components: {
-        Form
+    components: {},
+    mounted() {
+        axios.get("/api/books").then(res => (this.books = res.data));
     },
-    mounted(){
-        axios.get('/api/books').then(res => this.books = res.data)
-    },
-    data(){
+    data() {
         return {
-            books : Array
-        }
+            books: Array
+        };
     }
-}
+};
 </script>
 
 <style scoped>
-    p{
-        overflow: hidden;
-    }
+.book-list {
+    width: 300px;
+    height: 300px;
+    background-color: pink;
+}
 </style>

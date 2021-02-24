@@ -1,4 +1,4 @@
-require('./bootstrap');
+require("./bootstrap");
 
 // window.Vue = require('vue').default;
 //
@@ -21,34 +21,40 @@ require('./bootstrap');
 //     el: '#app',
 // });
 
+import Vue from "vue";
+import VueRouter from "vue-router";
 
-import Vue from 'vue'
-import VueRouter from 'vue-router'
+Vue.use(VueRouter);
 
-Vue.use(VueRouter)
-
-import App from './components/App'
-import Home from './views/Home.vue';
-import Endpoints from './views/Endpoints.vue';
+import App from "./components/App";
+import Home from "./views/Home.vue";
+import CreateBook from "./views/CreateBook.vue";
+import Endpoints from "./views/Endpoints.vue";
 
 const router = new VueRouter({
-    mode: 'history',
+    mode: "history",
     routes: [
         {
-            path: '/',
-            name: 'main',
-            component: Home
+            path: "/",
+            name: "main",
+            component: Home,
+            props: true
         },
         {
-            path: '/endpoints',
-            name: 'endpoints',
-            component: Endpoints,
+            path: "/create-new-book",
+            name: "createbook",
+            component: CreateBook
         },
-    ],
+        {
+            path: "/endpoints",
+            name: "endpoints",
+            component: Endpoints
+        }
+    ]
 });
 
 const app = new Vue({
-    el: '#app',
+    el: "#app",
     components: { App },
-    router,
+    router
 });
