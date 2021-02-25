@@ -30,6 +30,7 @@ import App from "./components/App";
 import Home from "./views/Home.vue";
 import CreateBook from "./views/CreateBook.vue";
 import Endpoints from "./views/Endpoints.vue";
+import Login from "./views/Login.vue";
 
 const router = new VueRouter({
     mode: "history",
@@ -37,13 +38,18 @@ const router = new VueRouter({
         {
             path: "/",
             name: "main",
-            component: Home,
-            props: true
+            component: Home
+        },
+        {
+            path: "/login",
+            name: "login",
+            component: Login
         },
         {
             path: "/create-new-book",
             name: "createbook",
             component: CreateBook
+            //meta: { requiresAuth: true }
         },
         {
             path: "/endpoints",
@@ -52,6 +58,21 @@ const router = new VueRouter({
         }
     ]
 });
+
+/*router.beforeEach((to, from, next) => {
+    if (to.matched.some(record => record.meta.requiresAuth)) {
+        if (!this.authUser) {
+            next({
+                path: "/login"
+                query: { redirect: to.fullPath }
+            });
+        } else {
+            next();
+        }
+    } else {
+        next();
+    }
+});*/
 
 const app = new Vue({
     el: "#app",

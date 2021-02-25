@@ -11,6 +11,7 @@
             <div class="col-4 book-list " v-for="book in books" :key="book.id">
                 <h5>{{ book.title }}</h5>
                 <p>{{ book.author }}</p>
+                <p>Posted by {{ book.user.name }}</p>
             </div>
         </div>
     </div>
@@ -22,8 +23,10 @@ import axios from "axios";
 export default {
     name: "Home",
     components: {},
-    mounted() {
-        axios.get("/api/books").then(res => (this.books = res.data));
+    created() {
+        axios.get("/api/books")
+        .then(res => (this.books = res.data))
+        .catch(err => console.log(err))
     },
     data() {
         return {
