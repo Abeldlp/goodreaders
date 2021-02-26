@@ -18,6 +18,9 @@ class BookController extends Controller
 
     public function store(Request $request)
     {
+        //DOUBLE CHECK IF THIS VALIDATION WORKS
+        //$validatedData =  $this->validate($request, $request->messages());
+        dd($request);
         $validatedData =  $request->validate([
             'title' => 'required',
             'description' => '',

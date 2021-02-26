@@ -2000,6 +2000,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Form",
@@ -2014,7 +2016,6 @@ __webpack_require__.r(__webpack_exports__);
         description: "",
         genre: "",
         buy_link: "",
-        image: "none",
         author: "",
         user_id: this.authUser.id
       }
@@ -2031,11 +2032,26 @@ __webpack_require__.r(__webpack_exports__);
     submit: function submit() {
       var _this = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_0___default().post("/api/books/save", this.form).then(function (res) {
+      var formData = new FormData();
+      formData.append("title", this.form.title);
+      formData.append("description", this.form.description);
+      formData.append("genre", this.form.genre);
+      formData.append("buy_link", this.form.buy_link);
+      formData.append("author", this.form.author);
+      formData.append("image", this.file);
+      formData.append("user_id", this.form.user_id);
+      axios__WEBPACK_IMPORTED_MODULE_0___default().post("/api/books/save", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data"
+        }
+      }).then(function (res) {
         return location.reload();
       })["catch"](function (error) {
         _this.errors = error.response.data.errors;
       });
+    },
+    handleFileUpload: function handleFileUpload(e) {
+      this.file = this.$refs.file.files[0];
     }
   }
 });
@@ -39081,7 +39097,26 @@ var render = function() {
             })
           ]),
           _vm._v(" "),
-          _vm._m(0),
+          _c("div", [
+            _c("div", { staticClass: "custom-file" }, [
+              _c("input", {
+                ref: "file",
+                staticClass: "custom-file-input",
+                attrs: { type: "file", id: "file" },
+                on: {
+                  change: function($event) {
+                    return _vm.handleFileUpload()
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _c(
+                "label",
+                { staticClass: "custom-file-label", attrs: { for: "files" } },
+                [_vm._v("Choose file")]
+              )
+            ])
+          ]),
           _vm._v(" "),
           _c("button", { staticClass: "btn btn-primary mb-3" }, [
             _vm._v("\n                Submit\n            ")
@@ -39091,27 +39126,7 @@ var render = function() {
     ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", [
-      _c("div", { staticClass: "custom-file" }, [
-        _c("input", {
-          staticClass: "custom-file-input",
-          attrs: { type: "file", id: "customFile" }
-        }),
-        _vm._v(" "),
-        _c(
-          "label",
-          { staticClass: "custom-file-label", attrs: { for: "customFile" } },
-          [_vm._v("Choose file")]
-        )
-      ])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
