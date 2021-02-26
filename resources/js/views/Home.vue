@@ -12,6 +12,7 @@
                 <h5>{{ book.title }}</h5>
                 <p>{{ book.author }}</p>
                 <p>Posted by {{ book.user.name }}</p>
+                <img style="height: 100px;" :src="`/storage/${book.image}`"/>
             </div>
         </div>
     </div>

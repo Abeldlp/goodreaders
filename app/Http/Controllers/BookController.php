@@ -8,6 +8,7 @@ use App\Models\Rating;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class BookController extends Controller
 {
@@ -20,7 +21,6 @@ class BookController extends Controller
     {
         //DOUBLE CHECK IF THIS VALIDATION WORKS
         //$validatedData =  $this->validate($request, $request->messages());
-        dd($request);
         $validatedData =  $request->validate([
             'title' => 'required',
             'description' => '',
@@ -30,7 +30,11 @@ class BookController extends Controller
             'buy_link' => '',
             'user_id' => ''
         ]);
-        $data = array_merge($validatedData, ['user_id' => Auth::id()]);
+        $imagePath = $request->image->store('uploads', 'public');
+        $data = array_merge($validatedData, [
+            'user_id' => Auth::id(),
+            'image' => $imagePath
+        ]);
         (new Book())->create($data);
     }
 
@@ -70,6 +74,8 @@ class BookController extends Controller
     public function destroy(Book $book)
     {
         $this->authorize('delete', $book);
+        $image_path = $book->image;
+        Storage::delete('/public/'.$image_path);
         Book::destroy($book->id);
     }
 }

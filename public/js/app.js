@@ -2168,6 +2168,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Home",
@@ -39335,7 +39336,12 @@ var render = function() {
           _vm._v(" "),
           _c("p", [_vm._v(_vm._s(book.author))]),
           _vm._v(" "),
-          _c("p", [_vm._v("Posted by " + _vm._s(book.user.name))])
+          _c("p", [_vm._v("Posted by " + _vm._s(book.user.name))]),
+          _vm._v(" "),
+          _c("img", {
+            staticStyle: { height: "100px" },
+            attrs: { src: "/storage/" + book.image }
+          })
         ])
       }),
       0
