@@ -63,11 +63,13 @@
                 <div>
                     <div class="custom-file">
                         <input
-                            type="file"
                             class="custom-file-input"
-                            id="customFile"
+                            type="file"
+                            id="file"
+                            ref="file"
+                            @change="handleFileUpload()"
                         />
-                        <label class="custom-file-label" for="customFile"
+                        <label class="custom-file-label" for="files"
                             >Choose file</label
                         >
                     </div>
@@ -95,7 +97,6 @@ export default {
                 description: "",
                 genre: "",
                 buy_link: "",
-                image: "none",
                 author: "",
                 user_id: this.authUser.id
             }
@@ -108,12 +109,28 @@ export default {
     },
     methods: {
         submit() {
+            let formData = new FormData();
+            formData.append("title", this.form.title);
+            formData.append("description", this.form.description);
+            formData.append("genre", this.form.genre);
+            formData.append("buy_link", this.form.buy_link);
+            formData.append("author", this.form.author);
+            formData.append("image", this.file);
+            formData.append("user_id", this.form.user_id);
+
             axios
-                .post("/api/books/save", this.form)
+                .post("/api/books/save", formData, {
+                    headers: {
+                        "Content-Type": "multipart/form-data"
+                    }
+                })
                 .then(res => location.reload())
                 .catch(error => {
                     this.errors = error.response.data.errors;
                 });
+        },
+        handleFileUpload(e) {
+            this.file = this.$refs.file.files[0];
         }
     }
 };
