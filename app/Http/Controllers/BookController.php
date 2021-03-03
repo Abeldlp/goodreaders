@@ -18,6 +18,7 @@ class BookController extends Controller
     {
         //DOUBLE CHECK IF THIS VALIDATION WORKS
         //$validatedData =  $this->validate($request, $request->messages());
+        dd($request);
         $validatedData =  $request->validate([
             'title' => 'required',
             'description' => '',

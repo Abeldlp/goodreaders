@@ -35,10 +35,11 @@
         <div class="router-link">
             <router-link :to="{ name: 'main' }">Home</router-link>
             |
-            <router-link :to="{ name: 'endpoints' }">Endpoints</router-link>
+            <router-link :to="{ name: 'endpoints' }">Endpoints</router-link> |
+            <router-link :to="{ name: 'login' }">Login</router-link>
         </div>
         <div class="container">
-            <router-view></router-view>
+            <router-view :authUser="authUser"></router-view>
         </div>
     </div>
 </template>
@@ -47,7 +48,7 @@
 export default {
     name: "App",
     props: {
-        authUser: Object
+        authUser: ""
     },
     data() {
         return {
@@ -67,10 +68,8 @@ export default {
 
 body {
     color: #2c3e50;
-}
-
-.main {
     width: 100%;
+    min-height: 100vh;
 }
 
 .nav-bar {
