@@ -28,7 +28,7 @@ class BookController extends Controller
             'buy_link' => '',
             'user_id' => 'integer'
         ]);
-
+            
         (new Book())->create($validatedData);
     }
 

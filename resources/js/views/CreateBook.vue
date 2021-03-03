@@ -124,7 +124,7 @@ export default {
                         "Content-Type": "multipart/form-data"
                     }
                 })
-                .then(res => location.reload())
+                //.then(res => location.reload())
                 .catch(error => {
                     this.errors = error.response.data.errors;
                 });

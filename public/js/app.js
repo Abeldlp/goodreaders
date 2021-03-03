@@ -2044,9 +2044,8 @@ __webpack_require__.r(__webpack_exports__);
         headers: {
           "Content-Type": "multipart/form-data"
         }
-      }).then(function (res) {
-        return location.reload();
-      })["catch"](function (error) {
+      }) //.then(res => location.reload())
+      ["catch"](function (error) {
         _this.errors = error.response.data.errors;
       });
     },
