@@ -2044,8 +2044,9 @@ __webpack_require__.r(__webpack_exports__);
         headers: {
           "Content-Type": "multipart/form-data"
         }
-      }) //.then(res => location.reload())
-      ["catch"](function (error) {
+      }).then(function (res) {
+        return location.reload();
+      })["catch"](function (error) {
         _this.errors = error.response.data.errors;
       });
     },
@@ -2068,6 +2069,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 //
 //
 //
@@ -2126,6 +2129,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Endpoints"
 });
@@ -2145,6 +2149,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+//
 //
 //
 //
@@ -39331,7 +39336,12 @@ var render = function() {
           _vm._v(" "),
           _c("p", [_vm._v(_vm._s(book.author))]),
           _vm._v(" "),
-          _c("p", [_vm._v("Posted by " + _vm._s(book.user.name))])
+          _c("p", [_vm._v("Posted by " + _vm._s(book.user.name))]),
+          _vm._v(" "),
+          _c("img", {
+            staticStyle: { height: "100px" },
+            attrs: { src: "/storage/" + book.image }
+          })
         ])
       }),
       0

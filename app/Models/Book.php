@@ -9,6 +9,10 @@ class Book extends Model
 {
     use HasFactory;
 
+    protected $casts = [
+        'user_id' => 'integer'
+    ];
+
     protected $fillable = [
         'title',
         'description',

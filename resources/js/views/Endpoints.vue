@@ -57,8 +57,9 @@
 </template>
 
 <script>
+import axios from 'axios';
 export default {
-    name: "Endpoints"
+    name: "Endpoints",
 }
 </script>
 

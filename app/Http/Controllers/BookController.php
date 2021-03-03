@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use App\Http\Requests\SaveBookRequest;
 use App\Models\Book;
 use App\Models\Rating;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class BookController extends Controller
 {
@@ -26,40 +29,54 @@ class BookController extends Controller
             'genre' => 'required',
             'author' => '',
             'buy_link' => '',
-            'user_id' => 'integer'
+            'user_id' => ''
         ]);
-            
-        (new Book())->create($validatedData);
+        $imagePath = $request->image->store('uploads', 'public');
+        $data = array_merge($validatedData, [
+            'user_id' => Auth::id(),
+            'image' => $imagePath
+        ]);
+        (new Book())->create($data);
     }
 
-    public function show($id)
+    public function show(Book $book)
     {
         return [
-            'book' => Book::find($id),
-            'ratings' => Rating::where('book_id', $id)->with('user')->with('replies')->get()
+            'book' => $book,
+            'ratings' => Rating::where('book_id', $book->id)->with('user')->with('replies')->get()
         ];
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, Book $book)
     {
-        //DOUBLE CHECK IF THIS VALIDATION WORKS
-        //$validatedData = $this->validate($request, $request->messages());
-        $validatedData =  $request->validate([
-            'title' => 'required',
-            'description' => '',
-            'image' => 'required',
-            'genre' => 'required',
-            'buy_link' => '',
-            'author' => '',
-            'user_id' => 'integer'
-        ]);
+        $this->authorize('update', $book);
 
-        $book = Book::findOrFail($id);
-        $book->update($validatedData);
+        $validatedData =  $request->validate(
+            [
+                'title' => 'required',
+                'description' => '',
+                'image' => 'required',
+                'genre' => 'required',
+                'buy_link' => '',
+                'author' => '',
+                'user_id' => ''
+            ],
+            [
+                'title.required' => 'the title is required',
+                'image.required' => 'the image is required',
+                'genre.required' => 'the genre is required',
+            ]
+        );
+
+        $data = array_merge($validatedData, ['user_id' => Auth::id()]);
+        $book->update($data);
     }
 
-    public function destroy($id)
+    public function destroy(Book $book)
     {
-        Book::destroy($id);
+        $this->authorize('delete', $book);
+        $image_path = $book->image;
+        Storage::delete('/public/'.$image_path);
+        Book::destroy($book->id);
     }
 }
