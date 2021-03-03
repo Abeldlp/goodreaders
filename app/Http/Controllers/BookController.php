@@ -21,7 +21,7 @@ class BookController extends Controller
     {
         //DOUBLE CHECK IF THIS VALIDATION WORKS
         //$validatedData =  $this->validate($request, $request->messages());
-        dd($request);
+        
         $validatedData =  $request->validate([
             'title' => 'required',
             'description' => '',
@@ -71,6 +71,7 @@ class BookController extends Controller
         $data = array_merge($validatedData, ['user_id' => Auth::id()]);
         $book->update($data);
     }
+
 
     public function destroy(Book $book)
     {
