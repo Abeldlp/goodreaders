@@ -33,8 +33,7 @@
         </div>
 
         <div class="router-link">
-            <router-link :to="{ name: 'main' }">Home</router-link>
-            |
+            <router-link :to="{ name: 'main' }">Home</router-link> |
             <router-link :to="{ name: 'endpoints' }">Endpoints</router-link> |
             <router-link :to="{ name: 'login' }">Login</router-link>
         </div>

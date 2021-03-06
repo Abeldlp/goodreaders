@@ -129,7 +129,7 @@ export default {
                     this.errors = error.response.data.errors;
                 });
         },
-        handleFileUpload(e) {
+        handleFileUpload() {
             this.file = this.$refs.file.files[0];
         }
     }

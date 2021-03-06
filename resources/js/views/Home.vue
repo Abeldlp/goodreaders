@@ -12,7 +12,17 @@
                 <h5>{{ book.title }}</h5>
                 <p>{{ book.author }}</p>
                 <p>Posted by {{ book.user.name }}</p>
-                <img style="height: 100px;" :src="`/storage/${book.image}`"/>
+                <router-link
+                    :to="{
+                        name: 'bookdetails',
+                        params: { id: book.id }
+                    }"
+                >
+                    <img
+                        style="height: 100px;"
+                        :src="`/storage/${book.image}`"
+                    />
+                </router-link>
             </div>
         </div>
     </div>
@@ -23,11 +33,12 @@ import axios from "axios";
 
 export default {
     name: "Home",
-    components: {},
+    props: ["id"],
     created() {
-        axios.get("/api/books")
-        .then(res => (this.books = res.data))
-        .catch(err => console.log(err))
+        axios
+            .get("/api/books")
+            .then(res => (this.books = res.data))
+            .catch(err => console.log(err));
     },
     data() {
         return {
