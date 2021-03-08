@@ -2,28 +2,37 @@
     <div>
         <h2>book details</h2>
         <img style="height: 200px" :src="`/storage/${book.image}`" />
-        <p>{{ book.title }}</p>
-        <p>{{ book.author }}</p>
-        <p>{{ book.description }}</p>
-        <p>{{ book.genre }}</p>
-        <p>{{ book.buy_link }}</p>
+        <p>Title: {{ book.title }}</p>
+        <p>Author: {{ book.author }}</p>
+        <p>Description: {{ book.description }}</p>
+        <p>Genre: {{ book.genre }}</p>
+        <p>Created at: {{ book.created_at }}</p>
         <button v-show="this.authUser" @click="deleteData">Delete</button>
 
-        <p>Rating:</p>
+        <router-link :to="{ name: 'editdetails', params: { id: book.id } }">
+            <button v-show="this.authUser">Edit</button>
+        </router-link>
+
+        <a :href="book.buy_link">Click to buy </a>
+        <button @click="showReviews">Make a Review</button>
+        <CreateRating v-show="seen" :id="id" />
     </div>
 </template>
 
 <script>
 import axios from "axios";
+import CreateRating from "../components/CreateRating.vue";
 export default {
+    components: { CreateRating },
     props: {
-        id: Number,
+        id: "",
         authUser: ""
     },
     data() {
         return {
             book: Object,
-            ratings: Array
+            ratings: Array,
+            seen: false
         };
     },
     created() {
@@ -39,10 +48,15 @@ export default {
         deleteData() {
             axios
                 .delete("/api/books/" + this.id)
-                //.then(res => (this.book = res.data))
-                //.then(alert("This book is deleted."))
                 .then(this.$router.push({ name: "main" }))
                 .catch(err => console.log(err));
+        },
+        showReviews() {
+            if (this.authUser) {
+                this.seen = true;
+            } else {
+                this.$router.push({ name: "login" });
+            }
         }
     }
 };

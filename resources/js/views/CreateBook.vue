@@ -11,9 +11,10 @@
                 </div>
 
                 <div class="mb-3">
-                    <label class="form-label">Title</label>
+                    <label class="form-label" for="title">Title</label>
                     <input
                         class="form-control"
+                        id="title"
                         type="text"
                         v-model="form.title"
                         placeholder="Harry Potter"
@@ -21,9 +22,10 @@
                 </div>
 
                 <div class="mb-3">
-                    <label class="form-label">Author</label>
+                    <label class="form-label" for="author">Author</label>
                     <input
                         class="form-control"
+                        id="author"
                         type="text"
                         v-model="form.author"
                         placeholder=" J. K. Rowling"
@@ -31,9 +33,10 @@
                 </div>
 
                 <div class="mb-3">
-                    <label class="form-label">Genre</label>
+                    <label class="form-label" for="genre">Genre</label>
                     <input
                         class="form-control"
+                        id="genre"
                         type="text"
                         v-model="form.genre"
                         placeholder="Fantasy-fiction"
@@ -41,20 +44,22 @@
                 </div>
 
                 <div class="mb-3">
-                    <label class="form-label">Buy Link</label>
+                    <label class="form-label" for="buy_link">Buy Link</label>
                     <input
                         class="form-control"
-                        type="text"
+                        id="buy_link"
+                        type="url"
                         v-model="form.buy_link"
                         placeholder="http://"
                     />
                 </div>
 
                 <div class="mb-3">
-                    <label class="form-label">Description</label>
+                    <label class="form-label" for="descrip">Description</label>
                     <textarea
                         class="form-control"
-                        type="text"
+                        name="descrip"
+                        id="descrip"
                         v-model="form.description"
                         placeholder="Best book ever!"
                     />

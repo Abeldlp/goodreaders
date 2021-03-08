@@ -51,6 +51,7 @@ class BookController extends Controller
     {
         $this->authorize('update', $book);
 
+        dd($request->title);
         $validatedData =  $request->validate(
             [
                 'title' => 'required',

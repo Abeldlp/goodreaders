@@ -33,7 +33,6 @@ import axios from "axios";
 
 export default {
     name: "Home",
-    props: ["id"],
     created() {
         axios
             .get("/api/books")
