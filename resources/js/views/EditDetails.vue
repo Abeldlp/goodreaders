@@ -111,7 +111,7 @@ export default {
             }
         };
     },
-    mounted() {
+    created() {
         if (!this.authUser) {
             this.$router.push({ name: "login" });
         }

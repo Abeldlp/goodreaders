@@ -18,7 +18,8 @@
                     placeholder="What did you think?"
                 ></textarea>
             </form>
-            <button @click="saveReview">Save</button>
+            <button @click="saveReview">Post</button>
+            <button @click="cancelReview">Cancel</button>
         </div>
     </div>
 </template>
@@ -39,7 +40,8 @@ export default {
     data() {
         return {
             comment: "",
-            score: Number
+            score: 0,
+            book_id: this.id
         };
     },
     methods: {
@@ -50,7 +52,10 @@ export default {
                     comment: this.comment,
                     score: this.score
                 })
-                .then(alert("Sent Review"));
+                .then(res => location.reload());
+        },
+        cancelReview() {
+            location.reload();
         }
     }
 };

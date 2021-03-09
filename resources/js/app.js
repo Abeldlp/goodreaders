@@ -33,6 +33,7 @@ import Endpoints from "./views/Endpoints.vue";
 import BookDetails from "./views/BookDetails.vue";
 import Login from "./views/Login.vue";
 import EditDetails from "./views/EditDetails.vue";
+import EditReviews from "./views/EditReviews.vue";
 
 const router = new VueRouter({
     mode: "history",
@@ -64,6 +65,12 @@ const router = new VueRouter({
             name: "editdetails",
             props: true,
             component: EditDetails
+        },
+        {
+            path: "/api/rating/:id ",
+            name: "editreviews",
+            props: true,
+            component: EditReviews
         },
         {
             path: "/endpoints",

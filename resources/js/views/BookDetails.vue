@@ -24,17 +24,29 @@
 
         <div class="showReview">
             <div v-for="rating in ratings">
-                <p>{{ rating.user.name }}</p>
-                <p>{{ rating.score }}</p>
-                <p>{{ rating.comment }}</p>
+                <p><span>Rated by : </span>{{ rating.user.name }}</p>
+                <p><span>Score : </span>{{ rating.score }}</p>
+                <p><span>Review : </span> {{ rating.comment }}</p>
             </div>
         </div>
+
+        <router-link
+            :to="{
+                name: 'editreviews',
+                params: { id: book.id }
+            }"
+        >
+            <div v-show="this.authUser">
+                <button>Edit Reviews</button>
+            </div>
+        </router-link>
     </div>
 </template>
 
 <script>
 import axios from "axios";
 import CreateRating from "../components/CreateRating.vue";
+
 export default {
     components: { CreateRating },
     props: {
@@ -75,4 +87,9 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+span {
+    font-weight: bold;
+    color: blueviolet;
+}
+</style>
