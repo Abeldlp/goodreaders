@@ -1,21 +1,34 @@
 <template>
     <div>
-        <h2>book details</h2>
-        <img style="height: 200px" :src="`/storage/${book.image}`" />
-        <p>Title: {{ book.title }}</p>
-        <p>Author: {{ book.author }}</p>
-        <p>Description: {{ book.description }}</p>
-        <p>Genre: {{ book.genre }}</p>
-        <p>Created at: {{ book.created_at }}</p>
-        <button v-show="this.authUser" @click="deleteData">Delete</button>
+        <div class="book-details">
+            <h2>book details</h2>
+            <img style="height: 200px" :src="`/storage/${book.image}`" />
+            <p>Title: {{ book.title }}</p>
+            <p>Author: {{ book.author }}</p>
+            <p>Description: {{ book.description }}</p>
+            <p>Genre: {{ book.genre }}</p>
+            <p>Created at: {{ book.created_at }}</p>
+            <button v-show="this.authUser" @click="deleteData">Delete</button>
 
-        <router-link :to="{ name: 'editdetails', params: { id: book.id } }">
-            <button v-show="this.authUser">Edit</button>
-        </router-link>
+            <router-link :to="{ name: 'editdetails', params: { id: book.id } }">
+                <button v-show="this.authUser">Edit</button>
+            </router-link>
 
-        <a :href="book.buy_link">Click to buy </a>
-        <button @click="showReviews">Make a Review</button>
-        <CreateRating v-show="seen" :id="id" />
+            <a :href="book.buy_link">Click to buy </a>
+        </div>
+
+        <div class="reviews-part">
+            <button @click="makeReview">Make a Review</button>
+            <CreateRating v-show="seen" :id="id" />
+        </div>
+
+        <div class="showReview">
+            <div v-for="rating in ratings">
+                <p>{{ rating.user.name }}</p>
+                <p>{{ rating.score }}</p>
+                <p>{{ rating.comment }}</p>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -51,7 +64,7 @@ export default {
                 .then(this.$router.push({ name: "main" }))
                 .catch(err => console.log(err));
         },
-        showReviews() {
+        makeReview() {
             if (this.authUser) {
                 this.seen = true;
             } else {

@@ -26,6 +26,7 @@
     },
     "dependencies": {
         "eslint": "^7.20.0",
-        "vue-router": "^3.5.1"
+        "vue-router": "^3.5.1",
+        "vue-star-rating": "^1.7.0"
     }
 }

@@ -34,7 +34,6 @@ import BookDetails from "./views/BookDetails.vue";
 import Login from "./views/Login.vue";
 import EditDetails from "./views/EditDetails.vue";
 
-
 const router = new VueRouter({
     mode: "history",
     routes: [
